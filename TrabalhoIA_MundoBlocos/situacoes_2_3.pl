@@ -395,7 +395,7 @@ plano_manual_sit3_s0_s7([
 % Isso facilita a leitura no terminal.
 
 mostra_estado(Estado) :-
-    normaliza_estado(Estado, Ordenado),
+    user:normaliza_estado(Estado, Ordenado),
     forall(
         member(Pos, Ordenado),
         (write(Pos), nl)
@@ -426,28 +426,40 @@ mostra_plano([Acao|Resto]) :-
 % ------------------------------------------------------------
 
 test(sit2_s0_valido) :-
-    estado_sit2_s0(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s0(S),
+        user:estado_valido(S)
+    )).
 
 test(sit2_s1_valido) :-
-    estado_sit2_s1(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s1(S),
+        user:estado_valido(S)
+    )).
 
 test(sit2_s2_valido) :-
-    estado_sit2_s2(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s2(S),
+        user:estado_valido(S)
+    )).
 
 test(sit2_s3_valido) :-
-    estado_sit2_s3(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s3(S),
+        user:estado_valido(S)
+    )).
 
 test(sit2_s4_valido) :-
-    estado_sit2_s4(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s4(S),
+        user:estado_valido(S)
+    )).
 
 test(sit2_s5_valido) :-
-    estado_sit2_s5(S),
-    estado_valido(S).
+    once((
+        estado_sit2_s5(S),
+        user:estado_valido(S)
+    )).
 
 
 % ------------------------------------------------------------
@@ -455,36 +467,52 @@ test(sit2_s5_valido) :-
 % ------------------------------------------------------------
 
 test(sit3_s0_valido) :-
-    estado_sit3_s0(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s0(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s1_valido) :-
-    estado_sit3_s1(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s1(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s2_valido) :-
-    estado_sit3_s2(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s2(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s3_valido) :-
-    estado_sit3_s3(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s3(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s4_valido) :-
-    estado_sit3_s4(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s4(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s5_valido) :-
-    estado_sit3_s5(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s5(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s6_valido) :-
-    estado_sit3_s6(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s6(S),
+        user:estado_valido(S)
+    )).
 
 test(sit3_s7_valido) :-
-    estado_sit3_s7(S),
-    estado_valido(S).
+    once((
+        estado_sit3_s7(S),
+        user:estado_valido(S)
+    )).
 
 
 % ------------------------------------------------------------
@@ -492,39 +520,49 @@ test(sit3_s7_valido) :-
 % ------------------------------------------------------------
 
 test(sit2_s0_para_s1) :-
-    estado_sit2_s0(S0),
-    estado_sit2_s1(S1),
-    transicao_sit2(s0, s1, Acao),
-    acao(Acao, S0, Resultado),
-    igual_estado(Resultado, S1).
+    once((
+        estado_sit2_s0(S0),
+        estado_sit2_s1(S1),
+        transicao_sit2(s0, s1, Acao),
+        user:acao(Acao, S0, Resultado),
+        user:igual_estado(Resultado, S1)
+    )).
 
 test(sit2_s1_para_s2) :-
-    estado_sit2_s1(S1),
-    estado_sit2_s2(S2),
-    transicao_sit2(s1, s2, Acao),
-    acao(Acao, S1, Resultado),
-    igual_estado(Resultado, S2).
+    once((
+        estado_sit2_s1(S1),
+        estado_sit2_s2(S2),
+        transicao_sit2(s1, s2, Acao),
+        user:acao(Acao, S1, Resultado),
+        user:igual_estado(Resultado, S2)
+    )).
 
 test(sit2_s2_para_s3) :-
-    estado_sit2_s2(S2),
-    estado_sit2_s3(S3),
-    transicao_sit2(s2, s3, Acao),
-    acao(Acao, S2, Resultado),
-    igual_estado(Resultado, S3).
+    once((
+        estado_sit2_s2(S2),
+        estado_sit2_s3(S3),
+        transicao_sit2(s2, s3, Acao),
+        user:acao(Acao, S2, Resultado),
+        user:igual_estado(Resultado, S3)
+    )).
 
 test(sit2_s3_para_s4) :-
-    estado_sit2_s3(S3),
-    estado_sit2_s4(S4),
-    transicao_sit2(s3, s4, Acao),
-    acao(Acao, S3, Resultado),
-    igual_estado(Resultado, S4).
+    once((
+        estado_sit2_s3(S3),
+        estado_sit2_s4(S4),
+        transicao_sit2(s3, s4, Acao),
+        user:acao(Acao, S3, Resultado),
+        user:igual_estado(Resultado, S4)
+    )).
 
 test(sit2_s4_para_s5) :-
-    estado_sit2_s4(S4),
-    estado_sit2_s5(S5),
-    transicao_sit2(s4, s5, Acao),
-    acao(Acao, S4, Resultado),
-    igual_estado(Resultado, S5).
+    once((
+        estado_sit2_s4(S4),
+        estado_sit2_s5(S5),
+        transicao_sit2(s4, s5, Acao),
+        user:acao(Acao, S4, Resultado),
+        user:igual_estado(Resultado, S5)
+    )).
 
 
 % ------------------------------------------------------------
@@ -532,51 +570,65 @@ test(sit2_s4_para_s5) :-
 % ------------------------------------------------------------
 
 test(sit3_s0_para_s1) :-
-    estado_sit3_s0(S0),
-    estado_sit3_s1(S1),
-    transicao_sit3(s0, s1, Acao),
-    acao(Acao, S0, Resultado),
-    igual_estado(Resultado, S1).
+    once((
+        estado_sit3_s0(S0),
+        estado_sit3_s1(S1),
+        transicao_sit3(s0, s1, Acao),
+        user:acao(Acao, S0, Resultado),
+        user:igual_estado(Resultado, S1)
+    )).
 
 test(sit3_s1_para_s2) :-
-    estado_sit3_s1(S1),
-    estado_sit3_s2(S2),
-    transicao_sit3(s1, s2, Acao),
-    acao(Acao, S1, Resultado),
-    igual_estado(Resultado, S2).
+    once((
+        estado_sit3_s1(S1),
+        estado_sit3_s2(S2),
+        transicao_sit3(s1, s2, Acao),
+        user:acao(Acao, S1, Resultado),
+        user:igual_estado(Resultado, S2)
+    )).
 
 test(sit3_s2_para_s3) :-
-    estado_sit3_s2(S2),
-    estado_sit3_s3(S3),
-    transicao_sit3(s2, s3, Acao),
-    acao(Acao, S2, Resultado),
-    igual_estado(Resultado, S3).
+    once((
+        estado_sit3_s2(S2),
+        estado_sit3_s3(S3),
+        transicao_sit3(s2, s3, Acao),
+        user:acao(Acao, S2, Resultado),
+        user:igual_estado(Resultado, S3)
+    )).
 
 test(sit3_s3_para_s4) :-
-    estado_sit3_s3(S3),
-    estado_sit3_s4(S4),
-    transicao_sit3(s3, s4, Acao),
-    acao(Acao, S3, Resultado),
-    igual_estado(Resultado, S4).
+    once((
+        estado_sit3_s3(S3),
+        estado_sit3_s4(S4),
+        transicao_sit3(s3, s4, Acao),
+        user:acao(Acao, S3, Resultado),
+        user:igual_estado(Resultado, S4)
+    )).
 
 test(sit3_s4_para_s5) :-
-    estado_sit3_s4(S4),
-    estado_sit3_s5(S5),
-    transicao_sit3(s4, s5, Acao),
-    acao(Acao, S4, Resultado),
-    igual_estado(Resultado, S5).
+    once((
+        estado_sit3_s4(S4),
+        estado_sit3_s5(S5),
+        transicao_sit3(s4, s5, Acao),
+        user:acao(Acao, S4, Resultado),
+        user:igual_estado(Resultado, S5)
+    )).
 
 test(sit3_s5_e_s6_sao_iguais_no_desenho) :-
-    estado_sit3_s5(S5),
-    estado_sit3_s6(S6),
-    igual_estado(S5, S6).
+    once((
+        estado_sit3_s5(S5),
+        estado_sit3_s6(S6),
+        user:igual_estado(S5, S6)
+    )).
 
 test(sit3_s6_para_s7) :-
-    estado_sit3_s6(S6),
-    estado_sit3_s7(S7),
-    transicao_sit3(s6, s7, Acao),
-    acao(Acao, S6, Resultado),
-    igual_estado(Resultado, S7).
+    once((
+        estado_sit3_s6(S6),
+        estado_sit3_s7(S7),
+        transicao_sit3(s6, s7, Acao),
+        user:acao(Acao, S6, Resultado),
+        user:igual_estado(Resultado, S7)
+    )).
 
 
 % ------------------------------------------------------------
@@ -584,18 +636,22 @@ test(sit3_s6_para_s7) :-
 % ------------------------------------------------------------
 
 test(plano_manual_sit2_s0_ate_s5_funciona) :-
-    estado_sit2_s0(S0),
-    estado_sit2_s5(Objetivo),
-    plano_manual_sit2_s0_s5(Plano),
-    aplica_plano(S0, Plano, Final),
-    igual_estado(Final, Objetivo).
+    once((
+        estado_sit2_s0(S0),
+        estado_sit2_s5(Objetivo),
+        plano_manual_sit2_s0_s5(Plano),
+        user:aplica_plano(S0, Plano, Final),
+        user:igual_estado(Final, Objetivo)
+    )).
 
 test(plano_manual_sit3_s0_ate_s7_funciona) :-
-    estado_sit3_s0(S0),
-    estado_sit3_s7(Objetivo),
-    plano_manual_sit3_s0_s7(Plano),
-    aplica_plano(S0, Plano, Final),
-    igual_estado(Final, Objetivo).
+    once((
+        estado_sit3_s0(S0),
+        estado_sit3_s7(Objetivo),
+        plano_manual_sit3_s0_s7(Plano),
+        user:aplica_plano(S0, Plano, Final),
+        user:igual_estado(Final, Objetivo)
+    )).
 
 
 :- end_tests(situacoes_2_3).

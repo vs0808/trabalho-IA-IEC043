@@ -179,8 +179,12 @@ intervalos_sobrepoem(A1, A2, B1, B2) :-
 % retangulos_sobrepoem(+Pos1, +Pos2)
 %
 % Verifica se dois blocos, dados por suas posicoes, ocupam algum espaco comum.
+%
+% A condicao B1 \= B2 evita comparar um bloco com ele mesmo.
 
 retangulos_sobrepoem(pos(B1,X1,Y1), pos(B2,X2,Y2)) :-
+    B1 \= B2,
+
     largura(B1, L1),
     altura(B1, H1),
     largura(B2, L2),
@@ -200,6 +204,7 @@ retangulos_sobrepoem(pos(B1,X1,Y1), pos(B2,X2,Y2)) :-
 % Verdadeiro se nenhum par de blocos ocupa o mesmo espaco.
 
 sem_colisoes([]).
+
 sem_colisoes([P|Resto]) :-
     \+ (
         member(Q, Resto),
@@ -526,24 +531,34 @@ plano_limite(Estado, Objetivo, Visitados, Limite, [Acao|Plano]) :-
 :- begin_tests(situacao1).
 
 test(s0_valido) :-
-    estado_sit1_s0(S),
-    estado_valido(S).
+    once((
+        estado_sit1_s0(S),
+        estado_valido(S)
+    )).
 
 test(d_ocupa_intervalo_correto) :-
-    estado_sit1_s0(S),
-    ocupa(d, S, 3, 6, 1, 2).
+    once((
+        estado_sit1_s0(S),
+        ocupa(d, S, 3, 6, 1, 2)
+    )).
 
 test(c_ocupa_intervalo_correto) :-
-    estado_sit1_s0(S),
-    ocupa(c, S, 0, 2, 0, 1).
+    once((
+        estado_sit1_s0(S),
+        ocupa(c, S, 0, 2, 0, 1)
+    )).
 
 test(d_livre_no_s0) :-
-    estado_sit1_s0(S),
-    bloco_livre(d, S).
+    once((
+        estado_sit1_s0(S),
+        bloco_livre(d, S)
+    )).
 
 test(c_livre_no_s0) :-
-    estado_sit1_s0(S),
-    bloco_livre(c, S).
+    once((
+        estado_sit1_s0(S),
+        bloco_livre(c, S)
+    )).
 
 test(a_nao_livre_no_s0, [fail]) :-
     estado_sit1_s0(S),
@@ -554,30 +569,42 @@ test(b_nao_livre_no_s0, [fail]) :-
     bloco_livre(b, S).
 
 test(sf1_valido) :-
-    estado_sit1_sf1(S),
-    estado_valido(S).
+    once((
+        estado_sit1_sf1(S),
+        estado_valido(S)
+    )).
 
 test(sf2_valido) :-
-    estado_sit1_sf2(S),
-    estado_valido(S).
+    once((
+        estado_sit1_sf2(S),
+        estado_valido(S)
+    )).
 
 test(sf3_valido) :-
-    estado_sit1_sf3(S),
-    estado_valido(S).
+    once((
+        estado_sit1_sf3(S),
+        estado_valido(S)
+    )).
 
 test(sf4_valido) :-
-    estado_sit1_sf4(S),
-    estado_valido(S).
+    once((
+        estado_sit1_sf4(S),
+        estado_valido(S)
+    )).
 
 test(existe_acao_movendo_d_no_s0) :-
-    estado_sit1_s0(S),
-    once(acao(move(d, p(3,1), p(_,_)), S, _)).
+    once((
+        estado_sit1_s0(S),
+        acao(move(d, p(3,1), p(_,_)), S, _)
+    )).
 
 test(plano_manual_s0_ate_sf4_funciona) :-
-    estado_sit1_s0(S0),
-    estado_sit1_sf4(Objetivo),
-    plano_manual_s0_sf4(Plano),
-    aplica_plano(S0, Plano, Final),
-    igual_estado(Final, Objetivo).
+    once((
+        estado_sit1_s0(S0),
+        estado_sit1_sf4(Objetivo),
+        plano_manual_s0_sf4(Plano),
+        aplica_plano(S0, Plano, Final),
+        igual_estado(Final, Objetivo)
+    )).
 
 :- end_tests(situacao1).
