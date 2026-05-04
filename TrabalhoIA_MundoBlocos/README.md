@@ -25,6 +25,8 @@ TrabalhoIA_MundoBlocos/
 ├── blocos.pl
 ├── situacoes_2_3.pl
 ├── teste.pl
+└── ResolucaoManual/
+└── ComparacaoManualvsIA/
 └── docs/
     ├── 01-representacao-conhecimento.md
     ├── 02-estados-situacoes.md
