@@ -152,6 +152,14 @@ Consulta:
 estado_sit1_sf4(S), mostra_estado(S).
 ```
 
+Saída esperada:
+
+pos(a,0,1)
+pos(b,5,0)
+pos(c,0,0)
+pos(d,2,0)
+S = [pos(c, 0, 0), pos(d, 2, 0), pos(b, 5, 0), pos(a, 0, 1)].
+
 Situação 2:
 
 ```bash
@@ -164,6 +172,14 @@ Consulta:
 estado_sit2_s5(S), mostra_estado(S).
 ```
 
+Saída esperada:
+
+pos(a,4,2)
+pos(b,5,2)
+pos(c,4,1)
+pos(d,3,0)
+S = [pos(d, 3, 0), pos(c, 4, 1), pos(a, 4, 2), pos(b, 5, 2)].
+
 Situação 3:
 
 ```bash
@@ -175,6 +191,15 @@ Consulta:
 ```prolog
 estado_sit3_s7(S), mostra_estado(S).
 ```
+
+Saída esperada:
+
+pos(a,0,1)
+pos(b,1,1)
+pos(c,0,0)
+pos(d,3,0)
+S = [pos(c, 0, 0), pos(d, 3, 0), pos(a, 0, 1), pos(b, 1, 1)].
+
 
 ---
 

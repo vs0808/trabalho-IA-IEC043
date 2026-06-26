@@ -1,131 +1,189 @@
-# Trabalho IA - Mundo dos Blocos com Dimensoes Diferentes
+# Trabalho IA - Mundo dos Blocos com Dimensões Diferentes
 
-Este repositorio documenta e implementa um planejador em Prolog para o Mundo dos Blocos com blocos de larguras diferentes.
+> **Observação:** Este README foi reconstruído a partir do conteúdo fornecido na conversa. Caso alguma parte tenha sido perdida devido ao limite de caracteres da plataforma, basta enviá-la posteriormente para complementar este arquivo.
 
-O problema foi modelado como busca entre estados. Cada estado representa a posicao espacial dos blocos, e cada acao `move(B, Pi, Pj)` transforma um estado em outro. Usando goal regression planning com partial ordering.
+## Descrição
 
-## Objetivo
+Este repositório documenta e implementa um planejador em Prolog para o clássico problema do **Mundo dos Blocos**, adaptado para um cenário em que os blocos possuem diferentes larguras e alturas.
 
-Construir uma representacao de conhecimento capaz de lidar com:
+O planejador utiliza **Goal Regression Planning** com **Partial Ordering**, considerando restrições geométricas, colisões e equilíbrio dos blocos.
 
-- blocos de dimensoes diferentes;
-- espacos horizontais e verticais;
-- verificacao de colisao;
-- verificacao de apoio;
-- verificacao de bloco livre;
-- validacao de movimento;
-- geracao de planos por meio do predicado `plano/3`.
+## Objetivos
 
-## Estrutura do projeto
+- Gerenciar blocos com diferentes dimensões.
+- Modelar o ambiente como um grid bidimensional.
+- Evitar colisões e sobreposições.
+- Validar regras de apoio e equilíbrio.
+- Gerar planos automaticamente.
+
+## Estrutura do Projeto
 
 ```text
 TrabalhoIA_MundoBlocos/
+├── ComparacaoManualvsIA/
+├── docs/
+├── ResolucaoIA/
+│   ├── blocos.pl
+│   ├── blocos1.pl
+│   ├── blocos2.pl
+│   └── blocos3.pl
+├── ResolucaoManual/
 ├── README.md
 ├── RELATORIO.md
-├── blocos.pl
-├── situacoes_2_3.pl
-├── teste.pl
-└── ResolucaoManual/
-└── ComparacaoManualvsIA/
-└── docs/
-    ├── 01-representacao-conhecimento.md
-    ├── 02-estados-situacoes.md
-    ├── 03-planos-manuais.md
-    ├── 04-planejador.md
-    ├── 05-testes-resultados.md
-    └── 06-como-executar.md
+└── trabalho1-IA.pdf
 ```
-
-## Arquivos principais
-
-| Arquivo | Funcao |
-|---|---|
-| `blocos.pl` | Contem a base geral do dominio: blocos, dimensoes, ocupacao, colisao, apoio, bloco livre, movimento e `plano/3`. |
-| `situacoes_2_3.pl` | Contem os estados formais das Situacoes 2 e 3, os planos manuais e os testes adicionais. |
-| `RELATORIO.md` | Relatorio comparando planos manuais com os resultados esperados dos testes e do planejador. |
-| `docs/01-representacao-conhecimento.md` | Explica a representacao escolhida. |
-| `docs/02-estados-situacoes.md` | Lista os estados representados em Prolog. |
-| `docs/03-planos-manuais.md` | Explica os planos manuais. |
-| `docs/04-planejador.md` | Explica o planejador automatico. |
-| `docs/05-testes-resultados.md` | Mostra como executar testes e quais saidas esperar. |
-| `docs/06-como-executar.md` | Guia de instalacao e execucao. |
 
 ## Requisitos
 
-- Linux Ubuntu 24.04 LTS ou similar.
-- SWI-Prolog instalado.
-
-Instalacao:
+Instale o SWI-Prolog:
 
 ```bash
 sudo apt update
 sudo apt install swi-prolog
 ```
 
-Verificacao:
+Verifique:
 
 ```bash
 swipl --version
 ```
 
-## Como executar
+## Executando os testes
 
-Entrar na pasta do projeto:
-
-```bash
-cd TrabalhoIA_MundoBlocos
-```
-
-Executar os testes da base principal:
+### Regras gerais
 
 ```bash
-swipl -q -s blocos.pl -g run_tests -t halt
+swipl -q -g run_tests -t halt ResolucaoIA/blocos.pl
 ```
 
-Executar os testes das Situacoes 2 e 3:
+### Situação 1
 
 ```bash
-swipl -q -s situacoes_2_3.pl -g run_tests -t halt
+swipl -q -g run_tests -t halt ResolucaoIA/blocos1.pl
 ```
 
-Abrir o modo interativo:
+### Situação 2
 
 ```bash
-swipl -q -s situacoes_2_3.pl
+swipl -q -g run_tests -t halt ResolucaoIA/blocos2.pl
 ```
 
-Exemplo de consulta:
+### Situação 3
+
+```bash
+swipl -q -g run_tests -t halt ResolucaoIA/blocos3.pl
+```
+
+## Execução interativa
+
+```bash
+cd ResolucaoIA/
+swipl
+```
+
+Situação 1:
+
+```bash
+swipl -q -s "blocos1.pl"
+```
+
+Consulta:
+
+```prolog
+estado_sit1_sf4(S), mostra_estado(S).
+```
+
+Saída esperada:
+
+pos(a,0,1)
+pos(b,5,0)
+pos(c,0,0)
+pos(d,2,0)
+S = [pos(c, 0, 0), pos(d, 2, 0), pos(b, 5, 0), pos(a, 0, 1)].
+
+Situação 2:
+
+```bash
+swipl -q -s "blocos2.pl"
+```
+
+Consulta:
+
+```prolog
+estado_sit2_s5(S), mostra_estado(S).
+```
+
+Saída esperada:
+
+pos(a,4,2)
+pos(b,5,2)
+pos(c,4,1)
+pos(d,3,0)
+S = [pos(d, 3, 0), pos(c, 4, 1), pos(a, 4, 2), pos(b, 5, 2)].
+
+Situação 3:
+
+```bash
+swipl -q -s "blocos3.pl"
+```
+
+Consulta:
 
 ```prolog
 estado_sit3_s7(S), mostra_estado(S).
 ```
 
-Sair do Prolog:
+Saída esperada:
+
+pos(a,0,1)
+pos(b,1,1)
+pos(c,0,0)
+pos(d,3,0)
+S = [pos(c, 0, 0), pos(d, 3, 0), pos(a, 0, 1), pos(b, 1, 1)].
+
+Carregando uma situação:
 
 ```prolog
-halt.
+?- consult('blocos1.pl')
 ```
 
-## Consulta importante
-
-Testar o plano manual da Situacao 3:
+### Validar plano manual
 
 ```prolog
-once((
-    estado_sit3_s0(S0),
-    estado_sit3_s7(Objetivo),
-    plano_manual_sit3_s0_s7(Plano),
-    aplica_plano(S0, Plano, Final),
-    igual_estado(Final, Objetivo)
-)).
+?- estado_sit1_s0(S0),
+   estado_sit1_sf4(Objetivo),
+   plano_manual_sit1_s0_sf4(Plano),
+   aplica_plano(S0, Plano, Final),
+   igual_estado(Final, Objetivo).
 ```
 
-Saida esperada:
+### Executar o planejador
 
 ```prolog
-true.
+?- estado_sit1_s0(S0),
+   estado_sit1_sf4(Objetivo),
+   plano(S0, Objetivo, PlanoGerado).
 ```
 
-## Observacao sobre o nome da pasta
+### Plano parcial (POP)
 
-O enunciado solicita uma pasta para a entrega no GitHub. Neste projeto foi usado o nome `TrabalhoIA_MundoBlocos`, pois ele descreve diretamente o dominio do problema.
+```prolog
+?- estado_sit1_s0(S0),
+   estado_sit1_sf4(Objetivo),
+   plano_parcial(S0, Objetivo, pop(Passos, Ordem), PlanoLinear).
+```
+
+### Visualizar um estado
+
+```prolog
+?- consult('blocos3.pl').
+?- estado_sit3_s7(S), mostra_estado(S).
+```
+
+Encerrar:
+
+```prolog
+?- halt.
+```
+
+Em docs/06-como-executar.md também temos uma documentação de outros testes.
